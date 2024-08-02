@@ -1,4 +1,7 @@
 #!/bin/bash
+dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
+biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
+#########################
 
 # // Export Banner Status Information
 export EROR="[${RED} EROR ${NC}]"
@@ -29,7 +32,7 @@ curl -fsSL https://rclone.org/install.sh | bash > /dev/null 2>&1
 printf "q\n" | rclone config > /dev/null 2>&1
 sleep 1
 echo -e "[ ${green}INFO${NC} ] Downloading rclone config ... "
-wget -q -O /root/.config/rclone/rclone.conf "https://raw.githubusercontent.com/Jatimpark/prem/main/backup/rclone.conf"
+wget -q -O /root/.config/rclone/rclone.conf "https://raw.githubusercontent.com/Jatimpark/tunel/main/backup/rclone.conf"
 git clone https://github.com/magnific0/wondershaper.git &> /dev/null
 cd wondershaper
 sleep 1

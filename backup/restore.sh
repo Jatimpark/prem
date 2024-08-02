@@ -48,7 +48,7 @@ sleep 1
 cp /root/backup/ss.conf /etc/shadowsocks-libev/ss.conf &> /dev/null
 echo -e "$COLOR1│${NC}  [ ${green}INFO${NC} ] • Restoring admin data..."
 sleep 1
-cp -r /root/backup/dnsvps.conf /var/lib/ &> /dev/null
+cp -r /root/backup/scrz-prem /var/lib/ &> /dev/null
 cp -r /root/backup/.acme.sh /root/ &> /dev/null
 #cp -r /root/backup/AryaVpn /etc/ &> /dev/null
 cp -r /root/backup/xray /etc/ &> /dev/null
