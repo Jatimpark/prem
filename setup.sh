@@ -214,24 +214,11 @@ mkdir -p /usr/bin/xray
 mkdir -p /etc/xray
 mkdir -p /usr/local/etc/xray
 echo "$domain" > /etc/${Auther}/domain.txt
-echo "IP=$domain" > /var/lib/scrz-prem/ipvps.conf
+echo "IP=$domain" > /var/lib/dnsvps.conf
 echo "$domain" > /root/domain
 domain=$(cat /root/domain)
 cp -r /root/domain /etc/xray/domain
 clear
-echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... "
-sleep 2
-echo -e "${OKEY} Starting Generating Certificate"
-rm -fr /root/.acme.sh
-mkdir -p /root/.acme.sh
-curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
-chmod +x /root/.acme.sh/acme.sh
-/root/.acme.sh/acme.sh --upgrade
-/root/.acme.sh/acme.sh --upgrade --auto-upgrade
-/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-/root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
-echo -e "${OKEY} Your Domain : $domain"
 sleep 2
 else
 echo -e "${EROR} Please Choose 1 & 2 Only !"
@@ -246,16 +233,13 @@ echo -e "┌──────────────────────�
 echo -e " \E[42;1;37m          >>> Install SSH / WS <<<        \E[0m$NC"
 echo -e "└─────────────────────────────────────────┘"
 sleep 1
-wget -q https://raw.githubusercontent.com/Jatimpark/tunel/main/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
-echo -e "┌─────────────────────────────────────────┐"
-echo -e " \E[42;1;37m            >>> Install Xray <<<         \E[0m$NC"
-echo -e "└─────────────────────────────────────────┘"
+wget -q https://raw.githubusercontent.com/Jatimpark/prem/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 sleep 1
 apt update -y
 apt upgrade -y
 apt dist-upgrade -y
 apt install socat netfilter-persistent -y
-apt install vnstat lsof fail2ban -y
+#apt install vnstat lsof fail2ban -y
 apt install curl sudo -y
 apt install screen cron screenfetch -y
 mkdir /backup >> /dev/null 2>&1
@@ -684,7 +668,7 @@ echo  ""
 echo  "" | tee -a log-install.txt
 rm -fr /root/aryapro.sh
 rm -fr /root/ssh-vpn.sh
-rm -fr /root/ins-xray.sh
+#rm -fr /root/ins-xray.sh
 rm -fr /root/setup.sh
 rm -fr /root/set-br.sh
 rm -fr /root/domain
